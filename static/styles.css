@@ -1,0 +1,409 @@
+/*
+============
+Global Variable
+============
+ */
+
+:root {
+  --primaryColor: #f15025;
+  --mainBlack: #222;
+  --mainWhite: #fff;
+  --offWhite: #f7f7f7;
+  --darkGrey: #afafaf;
+  --mainTransition: all 0.3s linear;
+  --mainSpacing: 0.2rem;
+}
+/*
+============
+Global Styles
+============
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Fira Code", monospace;
+  color: var(--mainBlack);
+  background-color: var(--mainWhite);
+  line-height: 1.5;
+}
+a {
+  text-decoration: none;
+}
+img {
+  width: 100%;
+  display: block;
+}
+ul {
+  list-style: none;
+}
+h1,
+h2,
+h3 {
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+  margin-bottom: 1.25rem;
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  margin-bottom: 0;
+}
+p {
+  font-weight: 300;
+  font-size: 0.7rem;
+  line-height: 2rem;
+}
+.btn {
+  display: inline-block;
+  text-transform: capitalize;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: var(--mainWhite);
+  color: var(--primaryColor);
+  border: 3px solid var(--primaryColor);
+  font-size: 1rem;
+  transition: var(--mainTransition);
+}
+.btn:hover {
+  background-color: var(--primaryColor);
+  color: var(--mainWhite);
+}
+
+/*
+============
+Main navbar  
+============
+ */
+
+.main-navbar {
+  background-color: var(--darkGrey);
+  padding: 0 2rem;
+}
+.main-navbar li a {
+  text-transform: capitalize;
+  display: block;
+  padding: 1rem 0;
+  color: var(--primaryColor);
+  letter-spacing: var(--mainSpacing);
+  transition: var(--mainTransition);
+}
+.main-navbar li a:hover {
+  color: var(--mainBlack);
+}
+@media (min-width: 992px) {
+  .main-navbar ul {
+    max-width: 1170px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .main-navbar ul li {
+    text-align: center;
+  }
+}
+
+/*
+============
+hero
+============
+*/
+
+.hero-header {
+  background-color: var(--primaryColor);
+  min-height: 100vh;
+  color: var(--mainWhite);
+  display: grid;
+
+  justify-content: center;
+  /* by this it takes actuall wdith content  */
+  align-items: center;
+  /* by this it takes the actuall height on conteny */
+}
+
+.hero-banner p {
+  width: 80%;
+  max-width: 560px;
+  font-size: 1rem;
+}
+.navigate-btn {
+  padding: 2rem;
+}
+@media (max-width: 600px) {
+  .hero-banner {
+    padding: 0 3rem;
+  }
+}
+@media (min-width: 786px) {
+  .hero-header {
+    background: linear-gradient(rgba(241, 80, 37, 0.75), rgba(0, 0, 0, 0.75)),
+      url("../images/image-2.jpeg") center/cover fixed no-repeat;
+  }
+}
+
+/*
+============
+Cards
+============
+*/
+.title {
+  text-align: center;
+}
+.cards {
+  padding: 4rem 0;
+}
+.cards-center {
+  width: 80%;
+  margin: 1170px;
+  margin: 2rem auto;
+}
+.card {
+  border: 1px solid var(--darkGrey);
+  margin-bottom: 3rem;
+}
+.card img {
+  max-height: 400px;
+  min-height: 400px;
+  object-fit: cover;
+  object-position: top;
+}
+.card-info {
+  padding: 1rem;
+}
+.card-info p {
+  padding-top: 1rem;
+  line-height: 1.5;
+}
+.card-footer {
+  background-color: var(--darkGrey);
+  padding: 0.3rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+}
+.card-footer span {
+  text-align: center;
+}
+/* @media (min-width: 960px) {
+  .cards-center {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    64px
+  }
+  .card {
+    margin: 0;
+  }
+}
+@media (min-width: 1460px) {
+  .cards-center {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .card {
+    margin: 0;
+  }
+} */
+
+/* we can make column layout without query */
+/* 1170 - 64 = (1106 /3)  = 366 */
+.cards-center {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(368px, 1fr));
+
+  /* when the width hit 366px then column number change */
+  /* here we can see main difference between auto-fill and auto-fit .
+  
+  in auto-fill when only one card exist in bigger screen it actually vaccenting the space for only taking one of the coloumn size eventhough there no card exist
+  
+  in auto-fit when only one card exist in bigger screen it actually taking entair width
+
+
+  in which purpose actually switch fill and fit 
+  in dynamic conent the data change with may be with more than 1 card and also 1 card in the single card time fill will only use own space not take entair width
+  but fit take entair width it's not look good
+
+  then we use fill
+  */
+}
+.card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+/* why we made grid to every card bcs actually by the effect of parent card it always get a height highest height to that row . but some situation the other card may not be strech into full height that will be look ungly.by we get the height.
+and we make the crd also grid in that card we making rows we now we have 3 item the middle is actually expanding so we making that strentch as possble rest other just take needed space
+*/
+
+/* =============
+Tiles
+===============
+*/
+.tiles {
+  padding: 4rem 0;
+}
+.tiles-center {
+  width: 90vw;
+  max-width: 1170px;
+  margin: 2rem auto;
+  display: grid;
+  row-gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .tiles-center {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 2rem;
+  }
+}
+@media (min-width: 992px) {
+  .tiles-center {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1170px) {
+  .tiles-center {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(5, 200px);
+    grid-template-areas:
+      "a a a b"
+      "a a a c"
+      "d d d d"
+      "e f f f"
+      "e g h i";
+  }
+  .tiles-center img {
+    height: 100%;
+    /* otherwise it taking the height of exact image   */
+    object-fit: cover;
+  }
+  .tile-1 {
+    grid-area: a;
+  }
+  .tile-2 {
+    grid-area: b;
+  }
+  .tile-3 {
+    grid-area: c;
+  }
+  .tile-4 {
+    grid-area: d;
+  }
+  .tile-5 {
+    grid-area: e;
+  }
+  .tile-6 {
+    grid-area: f;
+  }
+  .tile-7 {
+    grid-area: g;
+  }
+  .tile-8 {
+    grid-area: h;
+  }
+  .tile-9 {
+    grid-area: i;
+  }
+}
+
+/* ===========
+Layout
+=============
+*/
+.main {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto auto;
+}
+.header {
+  background-color: var(--primaryColor);
+  color: var(--mainWhite);
+  padding: 0.5rem 0;
+}
+.layout-navbar {
+  padding: 1rem;
+  background-color: var(--darkGrey);
+}
+.layout-navbar ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 2rem;
+}
+.layout-navbar li a {
+  color: var(--mainBlack);
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+  transition: var(--mainTransition);
+  font-size: 1.3rem;
+}
+.layout-navbar li a:hover {
+  color: var(--mainWhite);
+}
+
+.content {
+  padding: 2rem;
+}
+.content p {
+  font-size: 1rem;
+}
+.sidebar {
+  background-color: var(--primaryColor);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.sidebar span i {
+  color: var(--mainWhite);
+  font-size: 1.3rem;
+}
+
+.footer {
+  background-color: var(--mainBlack);
+  text-align: center;
+  padding: 1rem 0;
+}
+.footer p {
+  color: var(--mainWhite);
+  font-size: 1.3rem;
+  font-family: "Courier New", Courier, monospace;
+}
+
+@media (min-width: 768px) {
+  .layout-navbar ul {
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+  }
+}
+@media (min-width: 992px) {
+  .main {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+  }
+  .header {
+    grid-column: 1/-1;
+  }
+  .layout-navbar ul {
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    align-items: center;
+    padding: 2rem;
+    grid-column: 1/2;
+  }
+  .sidebar {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--darkGrey);
+  }
+  .footer {
+    grid-column: 1/-1;
+  }
+}
